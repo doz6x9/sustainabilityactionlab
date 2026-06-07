@@ -184,6 +184,7 @@ function Header({ activePortalTab, setActivePortalTab }) {
     ["Centre", "centre"],
     ["Student Hub", "student-hub"],
     ["Projects", "projects"],
+    ["Updates", "updates"],
     ["Recognition", "recognition"],
     ["Partners", "partners"]
   ];
@@ -739,35 +740,58 @@ function ProjectPanel() {
 
 function CalendarPanel() {
   const events = [
-    ["June 12", "Recycling campaign briefing", "Green Pécs NGO"],
-    ["June 18", "Campus biodiversity field walk", "Sustainability Centre"],
-    ["June 24", "Food rescue evening shift", "Local Social Kitchen"],
-    ["July 3", "Responsible business workshop", "UPFBE Faculty Team"]
+    ["JUN", "12", "Student Onboarding", "Training on NGO communication, reporting, and levels."],
+    ["JUN", "20", "NGO Project Kick-Off", "Student teams meet partner NGOs and finalize project tasks."],
+    ["JUL", "18", "Mid-Point Check-In", "Progress review, support session, and leaderboard update."],
+    ["SEP", "05", "Semester Award Ceremony", "Final project presentations, prizes, and Sustainability Leader announcement."]
+  ];
+  const activityFeed = [
+    [Sprout, "Green Pécs Campaign", "Students created a 2-week awareness campaign for recycling."],
+    [Handshake, "New NGO Partner Added", "Community Food Support joined the Lab with a donation-drive project."],
+    [Trophy, "Monthly Hero Announced", "Anna K. recognized for outstanding NGO communication support."]
   ];
 
   return (
-    <div className="rounded-lg border border-line p-5">
-      <h3 className="text-2xl font-black text-deep">Upcoming activities</h3>
-      <p className="mt-3 max-w-2xl leading-7 text-slate-600">
-        The calendar keeps volunteer shifts, briefings, and award deadlines in one place.
+    <div>
+      <h3 className="text-3xl font-black text-deep">Calendar and activities</h3>
+      <p className="mt-3 max-w-3xl leading-7 text-slate-600">
+        The dashboard shows deadlines, NGO events, student trainings, award ceremonies, and live activity from the Lab.
       </p>
-      <div className="mt-6 divide-y divide-line rounded-lg border border-line">
-        {events.map(([date, title, partner]) => (
-          <article key={title} className="grid gap-4 p-4 md:grid-cols-[110px_1fr_190px] md:items-center">
-            <span className="inline-flex w-fit items-center gap-2 rounded-full bg-mist px-3 py-1 text-sm font-black text-green">
-              <CalendarDays size={15} aria-hidden="true" />
-              {date}
-            </span>
-            <div>
-              <h4 className="font-black text-deep">{title}</h4>
-              <p className="mt-1 text-sm text-slate-600">{partner}</p>
-            </div>
-            <button className="inline-flex w-fit items-center gap-2 rounded-md bg-deep px-4 py-2.5 text-sm font-black text-white hover:bg-ink" type="button">
-              Add to Planner
-              <ChevronRight size={16} aria-hidden="true" />
-            </button>
-          </article>
-        ))}
+      <div className="mt-6 grid gap-5 lg:grid-cols-2">
+        <section className="rounded-lg border border-line bg-white p-5">
+          <h4 className="text-xl font-black text-deep">Upcoming Events</h4>
+          <div className="mt-5 divide-y divide-line">
+            {events.map(([month, day, title, body]) => (
+              <article key={title} className="grid gap-4 py-4 first:pt-0 last:pb-0 sm:grid-cols-[72px_1fr]">
+                <div className="flex h-16 w-16 flex-col items-center justify-center rounded-lg bg-mist text-green">
+                  <span className="text-sm font-black">{month}</span>
+                  <span className="text-xl font-black leading-none">{day}</span>
+                </div>
+                <div>
+                  <h5 className="font-black text-deep">{title}</h5>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">{body}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="rounded-lg border border-line bg-white p-5">
+          <h4 className="text-xl font-black text-deep">Activity Feed</h4>
+          <div className="mt-5 divide-y divide-line">
+            {activityFeed.map(([Icon, title, body]) => (
+              <article key={title} className="grid gap-4 py-4 first:pt-0 last:pb-0 sm:grid-cols-[72px_1fr]">
+                <div className="flex h-12 w-16 items-center justify-center rounded-lg bg-mist text-green">
+                  <Icon size={21} aria-hidden="true" />
+                </div>
+                <div>
+                  <h5 className="font-black text-deep">{title}</h5>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">{body}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   );
@@ -972,6 +996,72 @@ function ProjectBoard() {
   );
 }
 
+function BlogStories() {
+  const posts = [
+    {
+      icon: Sprout,
+      title: "How Business Students Can Support Local NGOs",
+      body: "A practical story on using marketing, event planning, and data skills for social impact.",
+      label: "Blog",
+      tone: "green"
+    },
+    {
+      icon: BarChart3,
+      title: "Monthly Impact Report: 300 Volunteer Hours Logged",
+      body: "A concise update showing student hours, NGO projects, SDGs, and photos from the month.",
+      label: "Impact Update",
+      tone: "blue"
+    },
+    {
+      icon: Trophy,
+      title: "Meet Our Sustainability Hero of the Month",
+      body: "A student spotlight showing contribution, NGO feedback, and project achievements.",
+      label: "Recognition",
+      tone: "gold"
+    }
+  ];
+
+  const labelClass = {
+    green: "bg-mist text-green",
+    blue: "bg-[#e9f1fb] text-[#2f6bc5]",
+    gold: "bg-[#fff3cf] text-[#7a5c10]"
+  };
+
+  return (
+    <section id="updates" className="bg-mist py-16">
+      <div className="mx-auto max-w-7xl px-5">
+        <div className="mb-8 max-w-4xl">
+          <p className="text-sm font-black uppercase text-green">Updates</p>
+          <h2 className="mt-3 text-3xl font-black leading-tight text-deep md:text-4xl">
+            Blogs, stories, and impact updates
+          </h2>
+          <p className="mt-4 max-w-3xl leading-7 text-slate-600">
+            The public side of the Lab makes student work visible to peers, NGOs, faculty stakeholders, and future partners.
+          </p>
+        </div>
+        <div className="grid gap-5 md:grid-cols-3">
+          {posts.map(({ icon: Icon, title, body, label, tone }) => (
+            <article key={title} className="overflow-hidden rounded-lg border border-line bg-white shadow-calm">
+              <div className="flex h-36 items-center justify-center bg-[#eef8ed]">
+                <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-white text-green shadow-calm">
+                  <Icon size={28} aria-hidden="true" />
+                </div>
+              </div>
+              <div className="p-5">
+                <h3 className="text-xl font-black leading-7 text-deep">{title}</h3>
+                <p className="mt-3 text-sm leading-6 text-slate-600">{body}</p>
+                <span className={`mt-5 inline-flex rounded-full px-3 py-1 text-xs font-black ${labelClass[tone]}`}>
+                  {label}
+                </span>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function StudentGallery() {
   return (
     <section className="bg-white py-16">
@@ -1151,6 +1241,7 @@ export default function App() {
         <StudentPortal activePortalTab={activePortalTab} setActivePortalTab={setActivePortalTab} />
         <RecognitionTables />
         <ProjectBoard />
+        <BlogStories />
         <StudentGallery />
         <PartnerAdmin />
         <Contact />
